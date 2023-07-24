@@ -82,9 +82,7 @@
           <p class="recipes-inf">${e}</p>
         </li>
       `).join("");iI.ingredientsRecipe.innerHTML=t}(e),function(e){if(0===e.tags.length)return;let t=e.tags.map(e=>` <li class="hashtags">#${e}</li>`).join("");iI.tagsRecipe.innerHTML=t}(e),iI.recieptsTitle.textContent=e.title,iI.videoRecipe.src=e.preview,iI.instructionsRecipe.textContent=e.instructions,iI.minutesRecipe.textContent=e.time+" min",setTimeout(()=>{window.addEventListener("keydown",ik),document.body.classList.add("overflowHidden"),iI.backdropRecipe.classList.add("active"),iI.modalRecipe.classList.add("active")},50),function(e){var t;let i;let r=`
-   <iframe
-                width="467px"
-                height="250px"
+   <iframe class="video-recipe-instruction"
                 src="https://www.youtube.com/embed/${(i=(t=e.youtube).split("").length,t.split("").splice(32,i).join(""))}"
 title = "YouTube video player"
 frameborder = "0"
@@ -105,4 +103,4 @@ allowfullscreen
     <button type="button" class="recipe-btn btn">See recipe</button>
   </div>
 </li>`).join("");iV.insertAdjacentHTML("beforeend",t)}).catch(e=>{console.warn(e)})}();
-//# sourceMappingURL=index.b53c6f2b.js.map
+//# sourceMappingURL=index.d8556d75.js.map
