@@ -41,9 +41,9 @@
       <div class="pop-recipe-card">
     <img class="img-pop-recipe" src="${t}" width="64" height="64" alt="">
     <div class="text-pop-recipe">
-    <h3 class="title-pop-recipe">${s}</h3>
-    <p class="description-pop-recipe">${i}</p>
+    <h3 class="title-pop-recipe" data-change-color='true'>${s}</h3>
+    <p class="description-pop-recipe" data-change-color='true'>${i}</p>
     </div>
     </div>
   </li>`).join("")}).catch(e=>{console.log(e)});let e0=document.getElementById("popularRecipeList");e0.addEventListener("click",e=>{let t=e.target.closest(".pop-recipe-link");(0,eQ.showModalAboutReciepts)(t.id)}),n("g5jnw")}();
-//# sourceMappingURL=index.796b081f.js.map
+//# sourceMappingURL=index.9ff46c00.js.map
