@@ -5,11 +5,11 @@ import './ingredients.js';
 import './header.js';
 import './hero-switch.js';
 import './modal-order-now.js';
-import './recipe-placeholder.js';
+import './recipe-placeholder';
 import './scroll-categories.js';
 import './fill-categories.js';
 import './rating.js';
-import './all-foods.js';
+
 import './heder-modal-menu.js';
 import './scroll-to-start.js';
 
