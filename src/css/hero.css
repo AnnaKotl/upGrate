@@ -135,6 +135,10 @@
     padding-right: 0;
     margin-bottom: 0;
     max-width: 546px;
+
+    /* fix with figma */
+    min-height: 480px; 
+    /* !!! */
   }
 
   .hero-section-container {

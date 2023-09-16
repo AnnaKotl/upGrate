@@ -5,6 +5,8 @@
   bottom: -70px;
   left: -40px;
   filter: blur(10px);
+  max-width: 350px;
+  max-height: 400px;
 }
 
 .master-thumb-swiper>.swiper-pagination {
@@ -27,12 +29,6 @@
   background-color: var(--accent-color);
 }
 
-
-/* .swiper-pagination {
-  margin-top: 0;
-  margin-bottom: 10px;
-  width: 100%;
-} */
 .img {
   max-width: none;
 }
@@ -68,7 +64,6 @@
   height: 302.5px;
   position: absolute;
   border-radius: 15px;
-  z-index: 1;
 }
 
 .mk-photo-wrapper.preview {
@@ -81,11 +76,6 @@
   position: absolute;
 }
 
-/* .svg-ellipse {
-  border-radius: 15px;
-  border: 1px solid rgba(155, 181, 55, 0.3);
-  background: #050505;
-} */
 .mk-photo-wrapper.zoom {
   height: 280px;
   width: 200px;
@@ -165,16 +155,22 @@
   background-color: var(--accent-color);
 }
 
-.swiper-pagination {
-  width: 24px;
-  height: 18px;
-}
+/* @media screen and (max-width: 767px) {
+  .swiper-pagination {
+    position: absolute;
+    z-index: 2;
+    width: auto;
+    left: 0;
+    bottom: -20px;
+  }
+} */
 
 @media screen and (min-width: 768px) {
   .swiper-pagination {
-    height: 5px;
+    /* !!! */
+    height: 20px;
+    /* fix with figma */
   }
-
   .icon-hero {
     position: absolute;
     top: 5px;
@@ -240,10 +236,4 @@
     font-size: 12px;
     line-height: 1.17;
   }
-
-  /* .swiper-pagination {
-    margin-bottom: 0px;
-    margin-top: 40px;
-    height: 30px;
-  } */
 }
