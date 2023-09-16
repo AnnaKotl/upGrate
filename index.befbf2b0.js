@@ -2,42 +2,56 @@
         translate3d(${h}, ${m}, ${f}px)
         rotateZ(${a.rotate?i?-v:v:0}deg)
         scale(${x})
-      `;if(a.slideShadows){let e=d.querySelector(".swiper-slide-shadow");e||(e=ew("cards",d)),e&&(e.style.opacity=Math.min(Math.max((Math.abs(c)-.5)/.5,0),1))}d.style.zIndex=-Math.abs(Math.round(p))+e.length,eg(a,d).style.transform=S}},setTransition:e=>{let s=t.slides.map(e=>$(e));s.forEach(t=>{t.style.transitionDuration=`${e}ms`,t.querySelectorAll(".swiper-slide-shadow").forEach(t=>{t.style.transitionDuration=`${e}ms`})}),ev({swiper:t,duration:e,transformElements:s})},perspective:()=>!0,overwriteParams:()=>({watchSlidesProgress:!0,virtualTranslate:!t.params.cssMode})})}];en.use(ey);let eb=document.querySelector(".swiper-wrapper");async function eE(){let e=await fetch("https://tasty-treats-backend.p.goit.global/api/events");if(!e.ok)throw Error(e.statusText);return await e.json()}async function ex(){try{let e=await eE(),t=e.map(e=>`
-         <div class="mk-card swiper-slide">
-           <ul class="mk-list">
-           <li class="mk-item chief">
-           <div class="mk-photo-wrapper chief">
-            <img class="chief-img img" src="${e.cook.imgUrl}" alt="${e.cook.name}" width="80" /></div></li>
-            <li class="mk-item dish">
-            <div class="mk-photo-wrapper preview">
-
-            <span class="icon-hero">
-              <svg xmlns="http://www.w3.org/2000/svg" width="351" height="442" viewBox="0 0 351 442" fill="none">
-              <g opacity="0.6" filter="url(#filter0_f_65_649)">
-              <ellipse cx="98.334" cy="98.3412" rx="98.334" ry="98.3412" transform="matrix(0.699884 -0.714257 0.716425 0.697664 35 225.471)" fill="#9BB537"/>
-              </g>
-              <defs>
-              <filter id="filter0_f_65_649" x="-86.2136" y="-36.3401" width="520.98" height="520.37" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-              <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-              <feGaussianBlur stdDeviation="81" result="effect1_foregroundBlur_65_649"/>
-              </filter>
-              </defs>
-              </svg>
-            </span>
-
-            <img class="preview-img img" src="${e.topic.previewUrl}" alt="dish" width="200"/>
-              <div class="mk-info">
-                <h4 class="mk-name">${e.topic.name}</h4>
-                <p class="mk-region">${e.topic.area}</p>
-              </div></div>
-            </li>
-            <li class="mk-item">
-            <div class="mk-photo-wrapper zoom">
-            <img class="dish-img img" src="${e.topic.imgUrl}" alt="dish" width="200"/></div></li>
-          </ul> 
+      `;if(a.slideShadows){let e=d.querySelector(".swiper-slide-shadow");e||(e=ew("cards",d)),e&&(e.style.opacity=Math.min(Math.max((Math.abs(c)-.5)/.5,0),1))}d.style.zIndex=-Math.abs(Math.round(p))+e.length,eg(a,d).style.transform=S}},setTransition:e=>{let s=t.slides.map(e=>$(e));s.forEach(t=>{t.style.transitionDuration=`${e}ms`,t.querySelectorAll(".swiper-slide-shadow").forEach(t=>{t.style.transitionDuration=`${e}ms`})}),ev({swiper:t,duration:e,transformElements:s})},perspective:()=>!0,overwriteParams:()=>({watchSlidesProgress:!0,virtualTranslate:!t.params.cssMode})})}];en.use(ey);var p=n("dIxxU");async function eb(){try{let e=await (0,p.default).get("https://tasty-treats-backend.p.goit.global/api/events");return e.data}catch(e){throw Error(e.message)}}let eE=`
+  <span class="icon-hero">
+    <svg xmlns="http://www.w3.org/2000/svg" width="320" height="400" viewBox="0 0 351 442" fill="none">
+      <g opacity="0.6" filter="url(#filter0_f_65_649)">
+        <ellipse cx="98.334" cy="98.3412" rx="98.334" ry="98.3412" transform="matrix(0.699884 -0.714257 0.716425 0.697664 35 225.471)" fill="#9BB537"/>
+      </g>
+      <defs>
+        <filter id="filter0_f_65_649" x="-86.2136" y="-36.3401" width="520.98" height="520.37" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+          <feGaussianBlur stdDeviation="81" result="effect1_foregroundBlur_65_649"/>
+        </filter>
+      </defs>
+    </svg>
+  </span>
+`,ex=e=>`
+  <div class="mk-card swiper-slide">
+    <ul class="mk-list">
+      <li class="mk-item chief">
+        <div class="mk-photo-wrapper chief">
+          <img class="chief-img img"
+          src="${e.cook.imgUrl}" 
+          alt="${e.cook.name}" 
+          width="80" />
+        </div>
+      </li>
+      <li class="mk-item dish">
+        <div class="mk-photo-wrapper preview">
+          ${eE}
+          <img class="preview-img img"
+          src="${e.topic.previewUrl}" 
+          alt="dish" 
+          width="200"/>
+          <div class="mk-info">
+            <h4 class="mk-name">${e.topic.name}</h4>
+            <p class="mk-region">${e.topic.area}</p>
           </div>
-        `).join("");eb.innerHTML=t}catch(e){console.error("Error:",e)}}!function(){ex();let e=new en(".swiper",{slidesPerGroup:1,spaceBetween:16,grabCursor:!0,slidesPerView:"auto",direction:"horizontal",rewind:!0,loop:!0,pagination:{el:".swiper-pagination",clickable:!0},slidesPerView:.65,speed:1e3,breakpoints:{375:{slidesPerView:.65,spaceBetween:8},768:{slidesPerView:.85,spaceBetween:16},1280:{slidesPerView:.81,spaceBetween:16}},autoplay:{delay:4e3}});e.on("slideChange",()=>{setTimeout(()=>{e.autoplay.start()},0)})}();let eS=document.getElementById("openModalOrderNowBtn"),eT=document.getElementById("openModalOrderNowBtnSecond"),eM=document.getElementById("closeModalOrderNowBtn"),eC=document.getElementById("modalordernow"),eL=document.getElementById("backdropmodalordernow"),eP=document.getElementById("formordernow");function ek(){eC.classList.add("open"),eL.classList.add("open"),window.addEventListener("keydown",ez)}function eA(){let e=eP.querySelectorAll("input"),t=eP.querySelectorAll("textarea");e.forEach(e=>e.value=""),t.forEach(e=>e.value="")}function eI(){eC.classList.remove("open"),eL.classList.remove("open"),window.removeEventListener("keydown",ez),eA()}function ez(e){"Escape"===e.code&&eI()}window.addEventListener("click",e=>{e.target===eL&&eI()}),document.addEventListener("DOMContentLoaded",()=>{eA()}),eS.addEventListener("click",ek),eT.addEventListener("click",ek),eM.addEventListener("click",eI);let e$=document.querySelector(".ordernow-form"),eO=e$.querySelector('input[name="name"]'),eD=e$.querySelector('input[name="phone"]'),eB=e$.querySelector('input[name="email"]'),eG=e$.querySelector('textarea[name="message"]');e$.addEventListener("input",()=>{let e={name:eO.value,phone:eD.value,email:eB.value,message:eG.value};localStorage.setItem("feedback-form-state",JSON.stringify(e))});let eN=localStorage.getItem("feedback-form-state");if(eN){let e=JSON.parse(eN);eO.value=e.name,eD.value=e.phone,eB.value=e.email,eG.value=e.message}e$.addEventListener("submit",e=>{e.preventDefault();let t={name:eO.value,phone:eD.value,email:eB.value,message:eG.value};localStorage.removeItem("feedback-form-state"),eO.value="",eD.value="",eB.value="",eG.value="",console.log(t)}),n("d0Tth");let eH={categoryList:document.querySelector(".category-list"),categoryContainer:document.querySelector(".category-container"),allCategoryButton:document.querySelector(".all-category-button")};eH.categoryContainer.addEventListener("click",function(e){let t=e.target;"BUTTON"===t.nodeName&&(eq&&eq.classList.remove("active"),t===eH.allCategoryButton?function(){let e=eH.categoryList.querySelectorAll("button");e.forEach(e=>{e.classList.remove("active")})}():eH.allCategoryButton.classList.remove("active"),t.classList.add("active"),eq=t)});let eq=null;eH.categoryList.addEventListener("click",e=>{e.target.classList.contains("category-btn")||e.stopPropagation()}),n("4PiVo");var p=n("dIxxU");async function eX(e,t){let s=`https://tasty-treats-backend.p.goit.global/api/recipes/${e}/rating`,i=await (0,p.default).patch(s,t);return i.data}var m=n("6JpON");let eY={openModalBtn:document.querySelectorAll(".give-a-rating"),closeModalBtn:document.querySelectorAll(".close-rating-btn"),modal:document.querySelector(".modal-rating"),form:document.querySelector(".modal-rating-content"),idButton:document.getElementById("idButton")};function e_(e){e.preventDefault(),document.addEventListener("keydown",eW),eY.modal.classList.remove("is-hidden"),eY.modal.addEventListener("click",eV),document.body.classList.add("modal-open"),ej(),eK(0)}function eR(){document.removeEventListener("keydown",eW),eY.modal.removeEventListener("click",eV),eY.modal.classList.add("is-hidden"),document.body.classList.remove("modal-open"),ej(),eK(0),eF()}function eV(e){e.target===eY.modal&&eR()}function eF(){let e=document.getElementById("emailInput");e.value=""}function ej(){let e=document.querySelectorAll(".rating-modal-form-icon");e.forEach(e=>e.classList.remove("active"))}function eW(e){"Escape"===e.key&&(eR(),e.target.blur())}async function eU(e){try{e.preventDefault();let t=eY.idButton.getAttribute("data-recipe-id"),s=await eX(t,function({"user-email-for-rating":e,ratingValue:t}){return""===e.value.trim()||t.value<1?i(m).Notify.failure("Please fill in all the fields!"):{rate:Number(t.value),email:e.value}}(e.currentTarget.elements));if(!s)return i(m).Notify.failure("Send rating failure");i(m).Notify.success("Thank you for your rating"),ej(),eY.form.reset(),eY.modal.classList.toggle("is-hidden"),eF()}catch(e){i(m).Notify.failure(e.message)}}function eK(e){let t=document.getElementById("ratingValue");t.value=e}eY.openModalBtn.forEach(e=>e.addEventListener("click",e_)),eY.closeModalBtn.forEach(e=>e.addEventListener("click",eR)),eY.form.addEventListener("submit",eU);let eJ=document.querySelectorAll(".rating-modal-form-icon");eJ.forEach(function(e){e.addEventListener("click",function(){let e=this.getAttribute("data-rating");eJ.forEach(function(t){t.getAttribute("data-rating")<=e?t.classList.add("active"):t.classList.remove("active")}),eK(e)})}),n("jpWR3"),n("icnFQ"),n("89MHW");var eQ=n("89MHW");let eZ=document.querySelector(".popular-recipes");fetch("https://tasty-treats-backend.p.goit.global/api/recipes/popular").then(e=>{if(!e.ok)throw Error(e.status);return e.json()}).then(e=>{eZ.innerHTML=e.map(({_id:e,preview:t,title:s,description:i})=>`<li class="pop-recipe-link" id="${e}">
+        </div>
+      </li>
+      <li class="mk-item">
+        <div class="mk-photo-wrapper zoom">
+          <img class="dish-img img"
+          src="${e.topic.imgUrl}" 
+          alt="dish" 
+          width="200"/>
+        </div>
+      </li>
+    </ul> 
+  </div>
+`,eS=document.querySelector(".swiper-wrapper");!async function(){try{let e=await eb(),t=e.map(ex).join("");eS.innerHTML=t;let s=new en(".swiper",{slidesPerGroup:1,spaceBetween:16,grabCursor:!0,slidesPerView:"auto",disableOnInteraction:!1,direction:"horizontal",rewind:!0,loop:!0,autoplay:{delay:3e3},mousewheel:{sensitivity:.5},pagination:{el:".swiper-pagination",clickable:!0},slidesPerView:.65,speed:1e3,breakpoints:{375:{slidesPerView:.65,spaceBetween:8},768:{slidesPerView:.85,spaceBetween:16},1280:{slidesPerView:.81,spaceBetween:16}}});s.on("slideChange",()=>{setTimeout(()=>{s.autoplay.start()},0)})}catch(e){console.error("Error:",e)}}();let eT=document.getElementById("openModalOrderNowBtn"),eM=document.getElementById("openModalOrderNowBtnSecond"),eC=document.getElementById("closeModalOrderNowBtn"),eL=document.getElementById("modalordernow"),eP=document.getElementById("backdropmodalordernow"),ek=document.getElementById("formordernow");function eA(){eL.classList.add("open"),eP.classList.add("open"),window.addEventListener("keydown",e$)}function eI(){let e=ek.querySelectorAll("input"),t=ek.querySelectorAll("textarea");e.forEach(e=>e.value=""),t.forEach(e=>e.value="")}function ez(){eL.classList.remove("open"),eP.classList.remove("open"),window.removeEventListener("keydown",e$),eI()}function e$(e){"Escape"===e.code&&ez()}window.addEventListener("click",e=>{e.target===eP&&ez()}),document.addEventListener("DOMContentLoaded",()=>{eI()}),eT.addEventListener("click",eA),eM.addEventListener("click",eA),eC.addEventListener("click",ez);let eO=document.querySelector(".ordernow-form"),eD=eO.querySelector('input[name="name"]'),eB=eO.querySelector('input[name="phone"]'),eG=eO.querySelector('input[name="email"]'),eN=eO.querySelector('textarea[name="message"]');eO.addEventListener("input",()=>{let e={name:eD.value,phone:eB.value,email:eG.value,message:eN.value};localStorage.setItem("feedback-form-state",JSON.stringify(e))});let eH=localStorage.getItem("feedback-form-state");if(eH){let e=JSON.parse(eH);eD.value=e.name,eB.value=e.phone,eG.value=e.email,eN.value=e.message}eO.addEventListener("submit",e=>{e.preventDefault();let t={name:eD.value,phone:eB.value,email:eG.value,message:eN.value};localStorage.removeItem("feedback-form-state"),eD.value="",eB.value="",eG.value="",eN.value="",console.log(t)}),n("d0Tth");let eq={categoryList:document.querySelector(".category-list"),categoryContainer:document.querySelector(".category-container"),allCategoryButton:document.querySelector(".all-category-button")};eq.categoryContainer.addEventListener("click",function(e){let t=e.target;"BUTTON"===t.nodeName&&(eX&&eX.classList.remove("active"),t===eq.allCategoryButton?function(){let e=eq.categoryList.querySelectorAll("button");e.forEach(e=>{e.classList.remove("active")})}():eq.allCategoryButton.classList.remove("active"),t.classList.add("active"),eX=t)});let eX=null;eq.categoryList.addEventListener("click",e=>{e.target.classList.contains("category-btn")||e.stopPropagation()}),n("4PiVo");var p=n("dIxxU");async function eY(e,t){let s=`https://tasty-treats-backend.p.goit.global/api/recipes/${e}/rating`,i=await (0,p.default).patch(s,t);return i.data}var m=n("6JpON");let e_={openModalBtn:document.querySelectorAll(".give-a-rating"),closeModalBtn:document.querySelectorAll(".close-rating-btn"),modal:document.querySelector(".modal-rating"),form:document.querySelector(".modal-rating-content"),idButton:document.getElementById("idButton")};function eR(e){e.preventDefault(),document.addEventListener("keydown",eU),e_.modal.classList.remove("is-hidden"),e_.modal.addEventListener("click",eF),document.body.classList.add("modal-open"),eW(),eJ(0)}function eV(){document.removeEventListener("keydown",eU),e_.modal.removeEventListener("click",eF),e_.modal.classList.add("is-hidden"),document.body.classList.remove("modal-open"),eW(),eJ(0),ej()}function eF(e){e.target===e_.modal&&eV()}function ej(){let e=document.getElementById("emailInput");e.value=""}function eW(){let e=document.querySelectorAll(".rating-modal-form-icon");e.forEach(e=>e.classList.remove("active"))}function eU(e){"Escape"===e.key&&(eV(),e.target.blur())}async function eK(e){try{e.preventDefault();let t=e_.idButton.getAttribute("data-recipe-id"),s=await eY(t,function({"user-email-for-rating":e,ratingValue:t}){return""===e.value.trim()||t.value<1?i(m).Notify.failure("Please fill in all the fields!"):{rate:Number(t.value),email:e.value}}(e.currentTarget.elements));if(!s)return i(m).Notify.failure("Send rating failure");i(m).Notify.success("Thank you for your rating"),eW(),e_.form.reset(),e_.modal.classList.toggle("is-hidden"),ej()}catch(e){i(m).Notify.failure(e.message)}}function eJ(e){let t=document.getElementById("ratingValue");t.value=e}e_.openModalBtn.forEach(e=>e.addEventListener("click",eR)),e_.closeModalBtn.forEach(e=>e.addEventListener("click",eV)),e_.form.addEventListener("submit",eK);let eQ=document.querySelectorAll(".rating-modal-form-icon");eQ.forEach(function(e){e.addEventListener("click",function(){let e=this.getAttribute("data-rating");eQ.forEach(function(t){t.getAttribute("data-rating")<=e?t.classList.add("active"):t.classList.remove("active")}),eJ(e)})}),n("jpWR3"),n("icnFQ"),n("89MHW");var eZ=n("89MHW");let e0=document.querySelector(".popular-recipes");fetch("https://tasty-treats-backend.p.goit.global/api/recipes/popular").then(e=>{if(!e.ok)throw Error(e.status);return e.json()}).then(e=>{e0.innerHTML=e.map(({_id:e,preview:t,title:s,description:i})=>`<li class="pop-recipe-link" id="${e}">
       <div class="pop-recipe-card">
     <img class="img-pop-recipe" src="${t}" width="64" height="64" alt="">
     <div class="text-pop-recipe">
@@ -45,5 +59,5 @@
     <p class="description-pop-recipe" data-change-color='true'>${i}</p>
     </div>
     </div>
-  </li>`).join("")}).catch(e=>{console.log(e)});let e0=document.getElementById("popularRecipeList");e0.addEventListener("click",e=>{let t=e.target.closest(".pop-recipe-link");(0,eQ.showModalAboutReciepts)(t.id)}),n("g5jnw")}();
-//# sourceMappingURL=index.fcb4194a.js.map
+  </li>`).join("")}).catch(e=>{console.log(e)});let e1=document.getElementById("popularRecipeList");e1.addEventListener("click",e=>{let t=e.target.closest(".pop-recipe-link");(0,eZ.showModalAboutReciepts)(t.id)}),n("g5jnw")}();
+//# sourceMappingURL=index.befbf2b0.js.map
