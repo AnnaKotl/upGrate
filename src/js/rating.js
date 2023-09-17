@@ -1,6 +1,6 @@
-import { setRecipeRating } from './api-kay-js-files/api-rating';
 import Notiflix from 'notiflix';
 import 'notiflix/src/notiflix.css';
+import { setRecipeRating } from './api-kay-js-files/api-rating';
 
 const refs = {
   openModalBtn: document.querySelectorAll('.give-a-rating'),
@@ -9,6 +9,8 @@ const refs = {
   form: document.querySelector('.modal-rating-content'),
   idButton: document.getElementById('idButton'),
 };
+
+let isModalOpen = false;
 
 refs.openModalBtn.forEach(btn => btn.addEventListener('click', openModalRating));
 refs.closeModalBtn.forEach(btn => btn.addEventListener('click', closeModal));
@@ -23,6 +25,12 @@ function openModalRating(e) {
 
   clearRating();
   setRatingValue(0.0);
+
+    // Включити заборону прокрутки фону
+  if (!isModalOpen) {
+    document.body.style.overflow = 'hidden';
+    isModalOpen = true;
+  }
 }
 
 function closeModal() {
@@ -34,11 +42,24 @@ function closeModal() {
   clearRating();
   setRatingValue(0.0);
   clearEmailInput();
+
+    // Вимкнути заборону прокрутки фону
+  if (isModalOpen) {
+    document.body.style.overflow = 'auto';
+    isModalOpen = false;
+  }
 }
 
 function closeBackdrop(e) {
   if (e.target === refs.modal) {
     closeModal();
+  }
+}
+
+function keyDownRate(e) {
+  if (e.key === 'Escape') {
+    closeModal();
+    e.target.blur();
   }
 }
 
@@ -54,13 +75,6 @@ function clearRating() {
 
 function toggleModal() {
   refs.modal.classList.toggle('is-hidden');
-}
-
-function keyDownRate(e) {
-  if (e.key === 'Escape') {
-    closeModal();
-    e.target.blur();
-  }
 }
 
 async function sendForm(e) {
