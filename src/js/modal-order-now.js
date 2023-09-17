@@ -8,6 +8,9 @@ const form = document.getElementById('formordernow');
 function openModalOrderNow() {
   modal.classList.add('open');
   backdropmodal.classList.add('open');
+
+  document.body.style.overflow = 'hidden'; // Заборонити прокручування фону
+
   window.addEventListener('keydown', escPress);
 }
 
@@ -21,6 +24,9 @@ function clearFormFields() {
 function closeModalOrderNow() {
   modal.classList.remove('open');
   backdropmodal.classList.remove('open');
+
+  document.body.style.overflow = ''; // Скасувати обмеження прокручування фону
+  
   window.removeEventListener('keydown', escPress);
   clearFormFields();
 }
