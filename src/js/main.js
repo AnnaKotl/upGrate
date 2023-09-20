@@ -9,7 +9,6 @@ import './recipe-placeholder';
 import './scroll-categories.js';
 import './fill-categories.js';
 import './rating.js';
-
 import './heder-modal-menu.js';
 import './scroll-to-start.js';
 
