@@ -6,7 +6,7 @@ const recipesList = document.querySelector('.recipes-list');
 const maxLength = 65;
 let limit = 9;
 
-const favoriteArr = JSON.parse(localStorage.getItem('favorites')) || [];
+export const favoriteArr = JSON.parse(localStorage.getItem('favorites')) || [];
 
 function onSeeBtnClick(evt) {
   evt.preventDefault();
