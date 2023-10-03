@@ -165,10 +165,9 @@
 // refs.addToFavoriteBtn.addEventListener('click', onFavouriteBtnClick);
 
 
-import { favoriteArr } from "./recipe-placeholder";
+export const favoriteArr = JSON.parse(localStorage.getItem('favorites')) || [];
 
-  export let refs = {
-    addToFavoriteBtn: document.querySelector('.btn-add'),
+   let refs = {
     recieptsTitle: document.querySelector('.reciepts-title'),
     backdropRecipe: document.querySelector('.backdrop-video-recipes'),
     modalRecipe: document.querySelector('.modal-video-recipe'),
@@ -220,11 +219,13 @@ import { favoriteArr } from "./recipe-placeholder";
       renderText(data);
       openModalOpen();
       renderVIDEO(data);
-      buttonsAddToFavuorite(data)
-      favouriteCheck()
+      buttonsAddToFavuorite(data);
+      refs.addToFavoriteBtn = document.querySelector(".btn-add");
+  
+      refs.addToFavoriteBtn?.addEventListener('click', addToFavorite);
     });
   }
-
+  
   async function recieptsOfFood(id) {
     const resp = await fetch(
       `https://tasty-treats-backend.p.goit.global/api/recipes/${id}`
@@ -278,7 +279,7 @@ import { favoriteArr } from "./recipe-placeholder";
         <div class="rating__active"></div>
       </div>
     </div>`;
-    refs.ratingRecipe.innerHTML = markupR; // Change refs.ratingBox to refs.ratingRecipe
+    refs.ratingRecipe.innerHTML = markupR;
   }
 
   function renderIngridient(data) {
@@ -292,9 +293,8 @@ import { favoriteArr } from "./recipe-placeholder";
         `
       )
       .join('');
-    refs.ingredientsRecipe.innerHTML = markup; // Change refs.IngredientBox to refs.ingredientsRecipe
+    refs.ingredientsRecipe.innerHTML = markup; 
   }
-
 
   function buttonsAddToFavuorite(data) {
     let markupR = `<button type="button" id=${data._id} class="btn-add js-addToFavorite-btn">
@@ -303,11 +303,9 @@ import { favoriteArr } from "./recipe-placeholder";
           <button type="button" id="give-a-rating" class="give-a-rating">
             Give a rating
           </button>` 
-          refs.placeForButtonsAdd.innerHTML = markupR; // Change refs.ratingBox to refs.ratingRecipe
+          refs.placeForButtonsAdd.innerHTML = markupR; 
   }
         
-
-
   function renderHashtags(data) {
     if (data.tags.length === 0) {                  
       return;
@@ -315,42 +313,38 @@ import { favoriteArr } from "./recipe-placeholder";
     const markup = data.tags
       .map(tag => ` <li class="hashtags">#${tag}</li>`)
       .join('');
-    refs.tagsRecipe.innerHTML = markup; // Change refs.hashtagsBox to refs.tagsRecipe
+    refs.tagsRecipe.innerHTML = markup; 
   }
 
-  function checkOnFavouriteModal() {
-    const activeButtonFav = refs.addToFavoriteBtn
-    const id = activeButtonFav.classList.id
+  function addToFavorite(event) {
+    event.preventDefault();
+    const id = event.currentTarget.id;
+  
+    if (favoriteArr.includes(id)) {
+      const index = favoriteArr.indexOf(id);
+      if (index !== -1) {
+        favoriteArr.splice(index, 1);
+      }
+    } else {
+      favoriteArr.push(id);
+    }
+  
+    updateFavoriteButton(id);
+  
+    localStorage.setItem('favorites', JSON.stringify(favoriteArr));
+  }
+  
+  function updateFavoriteButton(id) {
+    const addToFavoriteBtn = refs.addToFavoriteBtn;
     if (favoriteArr.includes(id)) {
       addToFavoriteBtn.classList.add('active');
-      currentBtn.innerHTML = "Remove from favourite"
+      addToFavoriteBtn.innerHTML = "Remove from favourite";
+      // currentBtn.classList.add('active');
     } else {
       addToFavoriteBtn.classList.remove('active');
-      currentBtn.innerHTML = "Add to favourite"
+      addToFavoriteBtn.innerHTML = "Add to favourite";
+      // currentBtn.classList.remove('active');
     }
   }
-
-  // function addToFavorite(event) {
-  //   event.preventDefault(); 
-  //   const currentBtn = event.currentTarget;
-  //   currentBtn.classList.toggle('active');
-  //   const id = currentBtn.id
-  //   if (currentBtn.classList.contains('active')) {
-  //     favoriteArr.push(id);
-  //   } else {
-  //     const recipeIndex = favoriteArr.indexOf(id);
-  //     if (recipeIndex !== -1) {
-  //       favoriteArr.splice(recipeIndex, 1);
-  //     }
-  //   }
-  //   localStorage.setItem('favorites', JSON.stringify(favoriteArr));
-  // }
-
-
-  function favouriteCheck() {
-    checkOnFavouriteModal();
-    refs.addToFavoriteBtn.addEventListener('click', () => {
-      
-    });
+  
     
-  }
