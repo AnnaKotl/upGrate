@@ -7,7 +7,13 @@ const refs = {
   categroyList: document.querySelector('.category-list'),
 };
 
-
+function renderCategoriesList(categories) {
+  refs.categroyList.insertAdjacentHTML(
+    'beforeend',
+    TemplateCategories(categories)
+  );
+};
+  
 async function fillCategoriesList() {
   try {
     const categories = await fetchCategories();
@@ -22,9 +28,3 @@ async function fillCategoriesList() {
 fillCategoriesList();
 
 
-function renderCategoriesList(categories) {
-  refs.categroyList.insertAdjacentHTML(
-    'beforeend',
-    TemplateCategories(categories)
-  );
-};

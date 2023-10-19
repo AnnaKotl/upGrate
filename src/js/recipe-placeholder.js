@@ -172,6 +172,8 @@ async function getRecipes(page = 1) {
     const renderCards = createMarkup(data.results);
     recipesList.innerHTML = renderCards;
 
+    getPagination(data);
+    
     initRating();
 
     const heartButton = document.querySelectorAll('.heart-button');
@@ -190,7 +192,7 @@ async function getRecipes(page = 1) {
 
     applyFavClassToItems();
 
-    getPagination(data);
+
   } catch (error) {
     console.warn(error);
   }
