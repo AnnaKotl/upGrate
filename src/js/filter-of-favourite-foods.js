@@ -2,6 +2,7 @@ import { all } from 'axios';
 import svg from '../images/heart-defs.svg';
 import { favoriteArr } from './recipe-placeholder'; 
 import { showModalAboutReciepts } from './video-recipe';
+import { uniq } from 'lodash';
 
 const favoriteRecipesList = document.querySelector('.favorite-recipes-list');
 const favoriteFilterList = document.querySelector('.favorite-filter-list');
@@ -113,12 +114,6 @@ function createMarkup(arr) {
 }
 
 function createFilterMarkup(data) {
-  const uniqueCategories = [];
-  data.forEach(recipe => {
-    if (!uniqueCategories.includes(recipe.category)) {
-      uniqueCategories.push(recipe.category);
-    }
-  });
 
   return uniqueCategories
     .map(category => {
@@ -130,8 +125,12 @@ function createFilterMarkup(data) {
 }
 
 
+let uniqueCategories = [];
+
 async function getFavouritesRecipes(favoriteArr) {
   try {
+    const uniqueCategoriesSet = new Set();
+
     for (const recipeId of favoriteArr) {
       const response = await fetch(`https://tasty-treats-backend.p.goit.global/api/recipes/${recipeId}`);
 
@@ -142,14 +141,21 @@ async function getFavouritesRecipes(favoriteArr) {
 
       const resultsArray = Array.isArray(data) ? data : [data];
 
+      resultsArray.forEach(recipe => {
+        uniqueCategoriesSet.add(recipe.category);
+      });
+
       const renderCards = createMarkup(resultsArray);
       favoriteRecipesList.insertAdjacentHTML('beforeend', renderCards);
-
-      favoriteFilterList.insertAdjacentHTML('beforeend', createFilterMarkup(resultsArray));
-      
-      initRating()
+       uniqueCategories = Array.from(uniqueCategoriesSet);
     }
-    
+
+   
+
+    favoriteFilterList.insertAdjacentHTML('beforeend', createFilterMarkup(uniqueCategories));
+
+    initRating();
+
     const heartButton = document.querySelectorAll('.heart-button');
     const recipeFavButtons = document.querySelectorAll('.see-recipe-btn');
 
@@ -157,7 +163,6 @@ async function getFavouritesRecipes(favoriteArr) {
       button.addEventListener('click', seeRecFav);
     });
 
-   
     heartButton.forEach(button => {
       button.addEventListener('click', (evt) => {
         onHeartButtonClick(evt);
@@ -165,8 +170,7 @@ async function getFavouritesRecipes(favoriteArr) {
       });
     });
 
-    applyFavClassToItems()
-
+    applyFavClassToItems();
   } catch (error) {
     console.warn(error);
   }
