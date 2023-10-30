@@ -3,7 +3,6 @@ import 'swiper/swiper-bundle.min.css';
 import { fetchMk } from './api-kay-js-files/api-hero-switch';
 import { iconHero, mkCard } from './partials-hero-swith';
 
-
 const mkBox = document.querySelector('.swiper-wrapper');
 
 async function renderMk() {

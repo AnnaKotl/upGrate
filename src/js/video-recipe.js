@@ -28,7 +28,10 @@ let refs = {
   function openModalOpen() {
     setTimeout(() => {
       window.addEventListener('keydown', onEscPress);
-      document.body.classList.add('overflowHidden');
+
+      // document.body.classList.add('overflowHidden');
+      document.body.style.overflow = 'hidden'; // Заборонити прокручування фону
+      
       refs.backdropRecipe.classList.add('active');
       refs.modalRecipe.classList.add('active');
     }, 50);
@@ -39,6 +42,8 @@ let refs = {
     document.body.classList.remove('overflowHidden');
     refs.backdropRecipe.classList.remove('active');
     refs.modalRecipe.classList.remove('active');
+    
+    document.body.style.overflow = ''; // Скасувати обмеження прокручування фону
   }
 
   function onEscPress(event) {
