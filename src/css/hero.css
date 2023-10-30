@@ -83,14 +83,10 @@
   background: #9bb537;
 }
 
-/* Адаптивна верстка */
-/* Стилі для моб */
-
 /* Стилі для таблета */
 @media screen and (min-width: 768px) {
   .hero-section-container {
     width: 736px;
-    /*padding-left: 32px;*/
   }
 
   .hero-section {
