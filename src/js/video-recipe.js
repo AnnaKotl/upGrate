@@ -20,6 +20,7 @@ let refs = {
   closeModalBtn: document.querySelectorAll('.close-rating-btn'),
   modal: document.querySelector('.modal-rating'),
   form: document.querySelector('.modal-rating-content'),
+  scrollButton: document.getElementById('scroll-up-button'),
 };
 
 let isModalOpen = false;
@@ -39,6 +40,9 @@ function openModalOpen() {
 
     refs.backdropRecipe.classList.add('active');
     refs.modalRecipe.classList.add('active');
+
+    // scroll
+    refs.scrollButton.style.display = 'none';
   }, 50);
 }
 
@@ -53,6 +57,9 @@ function closeModalClose() {
     document.body.style.overflow = 'auto';
     isModalOpen = false;
   }
+
+  // scroll
+  refs.scrollButton.style.display = 'block';
 }
 
 function onEscPress(event) {
@@ -242,6 +249,9 @@ function openModalRating(e) {
       document.body.style.overflow = 'hidden';
       isModalOpen = true;
     }
+
+    // scroll
+    refs.scrollButton.style.display = 'none';
   }, 150);
 }
 
@@ -260,6 +270,9 @@ function closeModal() {
     document.body.style.overflow = 'auto';
     isModalOpen = false;
   }
+
+  // scroll
+  refs.scrollButton.style.display = 'block';
 }
 
 function closeBackdrop(e) {
@@ -294,6 +307,7 @@ async function sendForm(e) {
     e.preventDefault();
     const idButton = document.getElementById('idButton');
     const id = idButton.getAttribute('data-recipe-id');
+
     const result = await setRecipeRating(id, getArgs(e.currentTarget.elements));
     if (!result) return Notiflix.Notify.failure('Send rating failure');
     Notiflix.Notify.success('Thank you for your rating');
@@ -303,6 +317,7 @@ async function sendForm(e) {
     clearEmailInput();
   } catch (err) {
     onError(err);
+    // console.log(err);
   }
 }
 
