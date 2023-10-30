@@ -1,4 +1,4 @@
-import { favoriteArr } from "./recipe-placeholder";
+import { favoriteArr } from './recipe-placeholder';
 import Notiflix from 'notiflix';
 import 'notiflix/src/notiflix.css';
 import { setRecipeRating } from './api-kay-js-files/api-rating';
@@ -14,7 +14,7 @@ let refs = {
   ingredientsRecipe: document.querySelector('.ingredients-recipe'),
   instructionsRecipe: document.querySelector('.instructions-recipe'),
   videoRecipe: document.querySelector('.video-recipe'),
-  placeForButtonsAdd : document.querySelector('.buttons-add'),
+  placeForButtonsAdd: document.querySelector('.buttons-add'),
   openModalBtn: document.querySelectorAll('.give-a-rating'),
   tagsRatingMinuts: document.querySelector('.tags-rating-minuts'),
   closeModalBtn: document.querySelectorAll('.close-rating-btn'),
@@ -22,95 +22,106 @@ let refs = {
   form: document.querySelector('.modal-rating-content'),
 };
 
-  refs.closeBtn?.addEventListener('click', closeModalClose);
-  refs.backdropRecipe?.addEventListener('click', clickBackdropClick);
-  
-  function openModalOpen() {
-    setTimeout(() => {
-      window.addEventListener('keydown', onEscPress);
+let isModalOpen = false;
 
-      // document.body.classList.add('overflowHidden');
-      document.body.style.overflow = 'hidden'; // Заборонити прокручування фону
-      
-      refs.backdropRecipe.classList.add('active');
-      refs.modalRecipe.classList.add('active');
-    }, 50);
-  }
+refs.closeBtn?.addEventListener('click', closeModalClose);
+refs.backdropRecipe?.addEventListener('click', clickBackdropClick);
 
-  function closeModalClose() {
-    window.removeEventListener('keydown', onEscPress);
-    document.body.classList.remove('overflowHidden');
-    refs.backdropRecipe.classList.remove('active');
-    refs.modalRecipe.classList.remove('active');
-    
-    document.body.style.overflow = ''; // Скасувати обмеження прокручування фону
-  }
+function openModalOpen() {
+  setTimeout(() => {
+    window.addEventListener('keydown', onEscPress);
 
-  function onEscPress(event) {
-    if (event.code === 'Escape') {
-      closeModalClose();
+    // Включити заборону прокрутки фону
+    if (!isModalOpen) {
+      document.body.style.overflow = 'hidden';
+      isModalOpen = true;
     }
+
+    refs.backdropRecipe.classList.add('active');
+    refs.modalRecipe.classList.add('active');
+  }, 50);
+}
+
+function closeModalClose() {
+  window.removeEventListener('keydown', onEscPress);
+  document.body.classList.remove('overflowHidden');
+  refs.backdropRecipe.classList.remove('active');
+  refs.modalRecipe.classList.remove('active');
+
+  // Вимкнути заборону прокрутки фону
+  if (isModalOpen) {
+    document.body.style.overflow = 'auto';
+    isModalOpen = false;
   }
+}
 
-  function clickBackdropClick(event) {
-    if (event.currentTarget === event.target) closeModalClose();
+function onEscPress(event) {
+  if (event.code === 'Escape') {
+    closeModalClose();
   }
+}
 
-  export function showModalAboutReciepts(id) {
-    recieptsOfFood(id).then(data => {
-      renderRanting(data);
-      initRating();
-      renderIngridient(data);
-      renderHashtags(data);
-      renderText(data);
-      openModalOpen();
-      renderVIDEO(data);
-      buttonsAddToFavuorite(data);
-     
-      refs.addToFavoriteBtn = document.querySelector(".btn-add");
-      
-      document.getElementById('give-a-rating').addEventListener('click', openModalRating);
-      
-      refs.form.addEventListener('submit', sendForm);
+function clickBackdropClick(event) {
+  if (event.currentTarget === event.target) closeModalClose();
+}
 
-      refs.addToFavoriteBtn?.addEventListener('click', addToFavorite);
+export function showModalAboutReciepts(id) {
+  recieptsOfFood(id).then(data => {
+    renderRanting(data);
+    initRating();
+    renderIngridient(data);
+    renderHashtags(data);
+    renderText(data);
+    openModalOpen();
+    renderVIDEO(data);
+    buttonsAddToFavuorite(data);
 
-      updateFavoriteButton(data);
-    });
-  }
-  
-  async function recieptsOfFood(id) {
-    const resp = await fetch(
-      `https://tasty-treats-backend.p.goit.global/api/recipes/${id}`
-    );
-    const data = await resp.json();
-    return data;
-  }
+    refs.addToFavoriteBtn = document.querySelector('.btn-add');
 
-  function renderText(data) {
-    refs.recieptsTitle.textContent = data.title;
-    refs.videoRecipe.src = data.preview;
-    refs.instructionsRecipe.textContent = data.instructions;
-    refs.minutesRecipe.textContent = data.time + ' min';
-  }
+    document
+      .getElementById('give-a-rating')
+      .addEventListener('click', openModalRating);
 
-  function initRating() {
-    const ratingValue = parseFloat(
-      document.querySelector('.rating__value.detail').textContent
-    );
-    const ratingActive = document.querySelector('.rating__active');
-    const percentageOfStars = ratingValue * 20 + '%';
+    refs.form.addEventListener('submit', sendForm);
 
-    ratingActive.style.setProperty('width', percentageOfStars);
-  }
+    refs.addToFavoriteBtn?.addEventListener('click', addToFavorite);
 
-  function getKeyYouTube(url) {
-    const urlParams = new URLSearchParams(new URL(url).search);
-    return urlParams.get('v');
-  }
+    updateFavoriteButton(data);
+  });
+}
 
-  function renderVIDEO(data) {
-    const markUp = `
+async function recieptsOfFood(id) {
+  const resp = await fetch(
+    `https://tasty-treats-backend.p.goit.global/api/recipes/${id}`
+  );
+  const data = await resp.json();
+  return data;
+}
+
+function renderText(data) {
+  refs.recieptsTitle.textContent = data.title;
+  refs.videoRecipe.src = data.preview;
+  refs.instructionsRecipe.textContent = data.instructions;
+  refs.minutesRecipe.textContent = data.time + ' min';
+}
+
+function initRating() {
+  const ratingValue = parseFloat(
+    document.querySelector('.rating__value.detail').textContent
+  );
+  const ratingActive = document.querySelector('.rating__active');
+  const percentageOfStars = ratingValue * 20 + '%';
+
+  ratingActive.style.setProperty('width', percentageOfStars);
+}
+
+function getKeyYouTube(url) {
+  const urlParams = new URLSearchParams(new URL(url).search);
+  return urlParams.get('v');
+}
+
+function renderVIDEO(data) {
+  const markUp = `
     <iframe class="video-recipe-instruction"
                   src="https://www.youtube.com/embed/${getKeyYouTube(
                     data.youtube
@@ -121,127 +132,117 @@ let refs = {
   allowfullscreen
     ></iframe >
   `;
-    refs.videoRecipe.innerHTML = markUp;
-  }
+  refs.videoRecipe.innerHTML = markUp;
+}
 
-  function renderRanting(data) {
-    let markupR = `
+function renderRanting(data) {
+  let markupR = `
       <div class="cards__rating rating">
       <div class="rating__value detail">${data.rating}</div>
       <div class="rating__body">
         <div class="rating__active"></div>
       </div>
     </div>`;
-    refs.ratingRecipe.innerHTML = markupR;
-  }
+  refs.ratingRecipe.innerHTML = markupR;
+}
 
-  function renderIngridient(data) {
-    const markup = data.ingredients
-      .map(
-        ({ measure, name }) => `
+function renderIngridient(data) {
+  const markup = data.ingredients
+    .map(
+      ({ measure, name }) => `
           <li class="recipes-subtitle">
             ${name}
             <p class="recipes-inf">${measure}</p>
           </li>
         `
-      )
-      .join('');
-    refs.ingredientsRecipe.innerHTML = markup; 
-  }
+    )
+    .join('');
+  refs.ingredientsRecipe.innerHTML = markup;
+}
 
-  function buttonsAddToFavuorite(data) {
-    let markupR = `<button type="button" id=${data._id} class="btn-add js-addToFavorite-btn">
+function buttonsAddToFavuorite(data) {
+  let markupR = `<button type="button" id=${data._id} class="btn-add js-addToFavorite-btn">
             Add to favorite
           </button>
           <button type="button" id="give-a-rating" class="give-a-rating">
             Give a rating
-          </button>` 
-          refs.placeForButtonsAdd.innerHTML = markupR; 
-  }
-        
-function renderHashtags(data) {
-    if (data.tags.length === 0) {                  
-      return;
-    } if( data.tags.length>=3) {
-refs.tagsRatingMinuts.style.flexDirection='column'
-    } else refs.tagsRatingMinuts.style.flexDirection='row'
-    const markup = data.tags
-      .map(tag => ` <li class="hashtags">#${tag}</li>`)
-      .join('');
-    refs.tagsRecipe.innerHTML = markup; 
-  }
-
-  function addToFavorite(event) {
-    event.preventDefault();
-    const addToFavoriteBtn = refs.addToFavoriteBtn;
-    const id = event.currentTarget.id;
-    const addtoFavHeartCard = document.querySelector(`button[data-id-favourite="${id}"]`);
-
-    if (favoriteArr.includes(id)) {
-      addToFavoriteBtn.classList.remove('active');
-      addToFavoriteBtn.innerHTML = "Add to favourite";
-      const index = favoriteArr.indexOf(id);
-      if (index !== -1) {
-        favoriteArr.splice(index, 1);
-        addtoFavHeartCard.classList.remove('active');
-      }
-    } else {
-      addToFavoriteBtn.classList.add('active');
-      addToFavoriteBtn.innerHTML = "Remove from favourite";
-      favoriteArr.push(id);
-      addtoFavHeartCard.classList.add('active');
-    }
-    localStorage.setItem('favorites', JSON.stringify(favoriteArr));
-  }
-  
-  function updateFavoriteButton(data) {
-    const addToFavoriteBtn = refs.addToFavoriteBtn;
-    const recipeId = data._id;
-    if (favoriteArr.includes(recipeId)) {
-        addToFavoriteBtn.classList.add('active');
-        addToFavoriteBtn.innerHTML = "Remove from favourite";
-
-    } else {
-        addToFavoriteBtn.classList.remove('active');
-        addToFavoriteBtn.innerHTML = "Add to favourite";
-
-    }
+          </button>`;
+  refs.placeForButtonsAdd.innerHTML = markupR;
 }
 
-  
+function renderHashtags(data) {
+  if (data.tags.length === 0) {
+    return;
+  }
+  if (data.tags.length >= 3) {
+    refs.tagsRatingMinuts.style.flexDirection = 'column';
+  } else refs.tagsRatingMinuts.style.flexDirection = 'row';
+  const markup = data.tags
+    .map(tag => ` <li class="hashtags">#${tag}</li>`)
+    .join('');
+  refs.tagsRecipe.innerHTML = markup;
+}
 
+function addToFavorite(event) {
+  event.preventDefault();
+  const addToFavoriteBtn = refs.addToFavoriteBtn;
+  const id = event.currentTarget.id;
+  const addtoFavHeartCard = document.querySelector(
+    `button[data-id-favourite="${id}"]`
+  );
 
+  if (favoriteArr.includes(id)) {
+    addToFavoriteBtn.classList.remove('active');
+    addToFavoriteBtn.innerHTML = 'Add to favourite';
+    const index = favoriteArr.indexOf(id);
+    if (index !== -1) {
+      favoriteArr.splice(index, 1);
+      addtoFavHeartCard.classList.remove('active');
+    }
+  } else {
+    addToFavoriteBtn.classList.add('active');
+    addToFavoriteBtn.innerHTML = 'Remove from favourite';
+    favoriteArr.push(id);
+    addtoFavHeartCard.classList.add('active');
+  }
+  localStorage.setItem('favorites', JSON.stringify(favoriteArr));
+}
 
+function updateFavoriteButton(data) {
+  const addToFavoriteBtn = refs.addToFavoriteBtn;
+  const recipeId = data._id;
+  if (favoriteArr.includes(recipeId)) {
+    addToFavoriteBtn.classList.add('active');
+    addToFavoriteBtn.innerHTML = 'Remove from favourite';
+  } else {
+    addToFavoriteBtn.classList.remove('active');
+    addToFavoriteBtn.innerHTML = 'Add to favourite';
+  }
+}
 
-
-
-
-
-
-
-
-
-
-
-let isModalOpen = false;
+// let isModalOpen = false;
 refs.closeModalBtn.forEach(btn => btn.addEventListener('click', closeModal));
 
 function openModalRating(e) {
-  e.preventDefault();
-  
-  document.addEventListener('keydown', keyDownRate);
-  refs.modal.classList.remove('is-hidden');
-  refs.modal.addEventListener('click', closeBackdrop);
-  document.body.classList.add('modal-open');
+  setTimeout(() => {
+    e.preventDefault();
 
-  clearRating();
-  setRatingValue(0.0);
+    closeModalClose(); //закрити модалку на фоні
+
+    document.addEventListener('keydown', keyDownRate);
+    refs.modal.classList.remove('is-hidden');
+    refs.modal.addEventListener('click', closeBackdrop);
+    document.body.classList.add('modal-open');
+
+    clearRating();
+    setRatingValue(0.0);
 
     // Включити заборону прокрутки фону
-  if (!isModalOpen) {
-    document.body.style.overflow = 'hidden';
-    isModalOpen = true;
-  }
+    if (!isModalOpen) {
+      document.body.style.overflow = 'hidden';
+      isModalOpen = true;
+    }
+  }, 150);
 }
 
 function closeModal() {
@@ -254,7 +255,7 @@ function closeModal() {
   setRatingValue(0.0);
   clearEmailInput();
 
-    // Вимкнути заборону прокрутки фону
+  // Вимкнути заборону прокрутки фону
   if (isModalOpen) {
     document.body.style.overflow = 'auto';
     isModalOpen = false;
@@ -291,7 +292,7 @@ function toggleModal() {
 async function sendForm(e) {
   try {
     e.preventDefault();
-    const idButton = document.getElementById('idButton')
+    const idButton = document.getElementById('idButton');
     const id = idButton.getAttribute('data-recipe-id');
     const result = await setRecipeRating(id, getArgs(e.currentTarget.elements));
     if (!result) return Notiflix.Notify.failure('Send rating failure');
